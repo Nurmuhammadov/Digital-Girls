@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+	{% block content %}
+        <main class="content">
+            <div class="col-12 col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Welcome page create form</h5>
+                    </div>
+                    <div style='height: 350px' class="card-body">
+                        <form enctype="multipart/form-data" method='post'>
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2 text-sm-right">Logo</label>
+                                <div class="col-sm-10">
+                                    <div>
+                                        <p>Currentlly: <a data-toggle="modal" data-target="#ImageShow" href="#">{{obj.logo}}</a></p>
+                                        <div class="modal fade" id="ImageShow" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Logo Image</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <img src='{{obj.logo.url}}'>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <input name="logo" value='{{obj.logo}}' type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2 text-sm-right">Background image</label>
+                                <div class="col-sm-10">
+                                    <div>
+                                        <p>Currentlly: <a data-toggle="modal" data-target="#BgImageShow" href="#">{{obj.bg_img}}</a></p>
+                                        <div class="modal fade" id="BgImageShow" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Background Image</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <img src='{{obj.bg_img.url}}'>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <input name="bg_img" value='{{obj.bg_img}}' type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="form-group row">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+	{% endblock content %}

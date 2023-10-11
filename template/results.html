@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+		{% block content %}
+        <style>
+            tbody, td, tfoot, th, thead, tr{
+                border-color: inherit;
+                border-style: solid;
+                border-width: 1;
+            }
+            .aaa{
+                cursor: no-drop;
+            }
+            .link-primary{
+                cursor: help;
+            }
+        </style>
+        <main class="content">
+            <div class="container-fluid p-0">
+
+                <h1 class="h3 mb-3">Users Results</h1>
+
+                <div  class="row">
+                    <div  class="col-12">
+                        <div  class="card">
+                            <div style="height: auto"  class="card-body">
+                                <table id="datatables-basic" class="table table-striped" style="width:100%">
+                                    <thead style="    border-color: inherit;
+                                    border-style: solid;
+                                    border-width: 1;">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th >True</th>
+                                            <th >False</th>
+                                            <th >Total Questions</th>
+                                            <th ></th>
+                                        </tr>
+                                    </thead >
+                                    <tbody style="    border-color: inherit;
+                                    border-style: solid;
+                                    border-width: 1;">
+                                        {% for i in obj %}
+                                        <tr >
+                                            <td><a class='aaa'><strong><em>{{i.user}}</em></strong></a></td>
+                                            <td><a class='aaa'><strong><em>{{i.how_many_true}}</em></strong></a></td>
+                                            <td><a class='aaa'><strong><em>{{i.how_many_false}}</em></strong></a></td>
+                                            <td><a class='aaa'><strong><em>{{i.total_questions}}</em></strong></a></td>
+                                            <td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url "view_answers" i.pk %}"><strong><em>Logik javoblar</em></strong></a></td>
+                                        {% endfor %}
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                            <nav aria-label="...">
+                                <ul class="pagination">
+                                    {% if obj.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ obj.previous_page_number }}">Previous</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <span class="page-link">Previous</span>
+                                        </li>
+                                    {% endif %}
+                                    
+                                    {% for page in obj.paginator.page_range %}
+                                        <li class="page-item{% if obj.number == page %} active{% endif %}">
+                                            {% if obj.number == page %}
+                                                <span class="page-link">{{ page }}</span>
+                                            {% else %}
+                                                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                    
+                                    {% if obj.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ obj.next_page_number }}">Next</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <span class="page-link">Next</span>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                                </nav>
+                        </div>
+                    </div>
+                </div>
+        </main>
+        {% endblock content %}

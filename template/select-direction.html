@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+		{% block content %}
+			<main class="content">
+				<div class="col-12 col-xl-12">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title">Question create form</h5>
+						</div>
+						<div class="card-body" style='display: flex;flex-direction: column-reverse;'>
+							<div style="display: flex; flex-wrap: wrap;
+							justify-content: space-around;">
+							{% for i in dirs %}
+							<div style="display: flex;
+							flex-direction: column-reverse;background-image: url('{{i.img.url}}'); background-size: cover; width: 300px; height: 300px" class="card">
+                                <div class="badge bg-primary text-wrap fs-5">
+										<a href='{% url "selected_direction" i.id %}' class="sidebar-link">{{i.name}}</a>
+								  </div>
+                            </div>
+							{% endfor %}
+						</div>
+							
+						</div>
+					</div>
+				</div>
+			</main>
+		{% endblock content %}

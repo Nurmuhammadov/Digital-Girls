@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+		{% block content %}
+        <main class="content">
+            <div class="col-12 col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Logic Question create form</h5>
+                    </div>
+                    <div class="card-body">
+                        <form method='post'>
+                            {% csrf_token %}
+                            {{form.media}}
+                            {{form.as_p}}
+                            <div>
+                                <button type="Submit" class="btn btn-success">SAVE</button>
+                                <button type="Submit" name='adding' value='001' class="btn btn-success">SAVE AND ADD ANOTHER</button>
+                                <button type="Submit" name='editing' value='002' class="btn btn-success">SAVE AND CONTINUE EDITING</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+		{% endblock content %}

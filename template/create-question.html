@@ -1,0 +1,37 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+		{% block content %}
+		<style>
+			label{
+			font-size: large;
+			color: #649755;
+		}
+		</style>
+			<main class="content">
+				<div class="col-12 col-xl-12">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title">Question create form</h5>
+						</div>
+						<div class="card-body">
+							<form method='post'>
+								{% csrf_token %}
+								{{form.media}}
+								{{form.as_p}}
+								{% if dir.is_logic == True %}
+								<div>
+									<p>Logic Question Create</p>
+								</div>
+								{{formlq.as_p}}
+								{% endif %}
+								<div>
+									<button type="Submit" class="btn btn-success">SAVE</button>
+									<button type="Submit" name='adding' value='001' class="btn btn-success">SAVE AND ADD ANOTHER</button>
+									<button type="Submit" name='editing' value='002' class="btn btn-success">SAVE AND CONTINUE EDITING</button>
+								</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</main>
+		{% endblock content %}

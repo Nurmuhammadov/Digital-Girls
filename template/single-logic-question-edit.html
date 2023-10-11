@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+	{% block content %}
+	<style>
+		label{
+			font-size: large;
+			color: #649755;
+		}
+	</style>
+		<main class="content">
+			<div class="col-12 col-xl-12">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="card-title">Logic question edit</h5>
+					</div>
+					<div class="card-body">
+						<form method='post'>
+							{% csrf_token %}
+							{{form.media}}
+							{{form.as_p}}
+							<div class="card">
+								<div style='display: flex; justify-content: space-between;'>
+									<!-- BEGIN success modal -->
+									<div class="modal-footer">
+										<button type="Submit" class="btn btn-success">SAVE</button>
+										<button type="Submit" name='adding' value='001' class="btn btn-success">SAVE AND ADD ANOTHER</button>
+										<button type="Submit" name='editing' value='002' class="btn btn-success">SAVE AND CONTINUE EDITING</button>
+									</div>
+									<div style='display: flex;
+									-webkit-box-align: center;
+									align-items: center;
+									-webkit-box-pack: end;
+									justify-content: flex-end;
+									padding: 1rem;
+									border-top: 1px solid #dee2e6;
+									border-bottom-right-radius: 0.3rem;
+									border-bottom-left-radius: 0.3rem;'>
+									<a href="{% url 'delete_logic_question' pk %}" style="color: white" type="button" class="btn btn-danger">DELETE</a>
+								</div>
+							</div>
+						</div>
+						
+					</form>
+					</div>
+					
+				</div>
+			</div>
+		</main>
+	{% endblock content %}

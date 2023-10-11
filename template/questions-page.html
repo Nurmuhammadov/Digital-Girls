@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+	{% block content %}
+        <main  class="content">
+            <div class="container-fluid p-0">
+
+                <h1 class="h3 mb-3">{{direction.name}}</h1>
+
+                <div  class="row">
+                    <div class="col-12">
+                        <div  class="card">
+                            <div style="display:flex">
+                            <div style="display:flex; 
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            width:100%;
+                            align-items: flex-end;">
+                                <a style="margin-right:3%" class="btn btn-primary" href="{% url 'create_question' dir %}" role="button">Create</a>
+                            </div> 
+                        </div>
+                           
+                            <div class="card-body">
+                                <table id="datatables-basic" class="table table-striped" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:10px">№</th>
+                                            <th>Direction</th>
+                                            <th>Question</th>
+                                            <th>Variant A</th>
+                                            <th>Variant B</th>
+                                            <th>Variant C</th>
+                                            <th>Variant D</th>
+                                            <th>True answer</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in questions %}
+                                        <tr >
+                                            <td><strong><em>{{forloop.counter}}</em></strong></td>
+                                            <td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'single_question_edit' i.id %}"><strong><em>{{i.which_direction.name}}</em></strong></a></td>
+                                            <td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'single_question_edit' i.id %}">{{i.question|slice:":15"|safe}}</a></td>
+                                            <td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'single_question_edit' i.id %}">{{i.answer_a|slice:":15"|safe}}</a></td>
+                                            <td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'single_question_edit' i.id %}">{{i.answer_b|slice:":15"|safe}}</a></td>
+                                            <td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'single_question_edit' i.id %}">{{i.answer_c|slice:":15"|safe}}</a></td>
+                                            <td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'single_question_edit' i.id %}">{{i.answer_d|slice:":15"|safe}}</a></td>
+                                            {%if i.true_answer == 1%}
+                                                <td><a href="{% url 'single_question_edit' i.id %}">A</a></td>
+                                            {%endif%}
+                                            {%if i.true_answer == 2%}
+                                                <td><a href="{% url 'single_question_edit' i.id %}">B</a></td>
+                                            {%endif%}
+                                            {%if i.true_answer == 3%}
+                                                <td><a href="{% url 'single_question_edit' i.id %}">C</a></td>
+                                            {%endif%}
+                                            {%if i.true_answer == 4%}
+                                                <td><a href="{% url 'single_question_edit' i.id %}">D</a></td>
+                                            {%endif%}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <nav aria-label="...">
+                                <ul class="pagination">
+                                    {% if questions.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ questions.previous_page_number }}">Previous</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <span class="page-link">Previous</span>
+                                        </li>
+                                    {% endif %}
+                                    
+                                    {% for page in questions.paginator.page_range %}
+                                        <li class="page-item{% if questions.number == page %} active{% endif %}">
+                                            {% if questions.number == page %}
+                                                <span class="page-link">{{ page }}</span>
+                                            {% else %}
+                                                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                    
+                                    {% if questions.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ questions.next_page_number }}">Next</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <span class="page-link">Next</span>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </main>
+    {% endblock content %}
